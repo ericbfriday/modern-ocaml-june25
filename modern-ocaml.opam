@@ -1,0 +1,40 @@
+opam-version: "2.0"
+maintainer: "Louis Roché <louis@louisroche.net>"
+authors: "Louis Roché <louis@louisroche.net>"
+homepage: "https://github.com/Khady/modern-ocaml"
+bug-reports: "https://github.com/Khady/modern-ocaml/issues"
+license: "AGPL-3.0-or-later"
+dev-repo: "git+https://github.com/Khady/modern-ocaml.git"
+doc: "https://khady.github.io/modern-ocaml/"
+tags: ["ocaml" "is" "love"]
+depends: [
+  "ocaml"
+  "dune" {>= "3.17"}
+  "ocamlformat" {= "0.27.0" & with-dev-setup}
+  "ocaml-lsp-server" {with-dev-setup}
+  "odoc" {with-doc}
+  "dune-release" {with-dev-setup}
+]
+build: [
+  ["dune" "subst"] {pinned}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+name: "modern-ocaml"
+synopsis: "Template for a modern ocaml project"
+description: "Complete configuration of an ocaml project
+- package manager
+- CI
+- build system
+- code formatting
+- editor setup
+"
